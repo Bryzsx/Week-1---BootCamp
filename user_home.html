@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<style>
+    .profile-top-right {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #555;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: transform 0.2s ease;
+    }
+
+    .profile-top-right:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .card {
+        margin-top: 100px;
+    }
+</style>
+
+<!-- 🖼️ Profile image top-right -->
+{% if user.image_filename %}
+    <img src="{{ url_for('static', filename='uploads/' + user.image_filename) }}"
+         alt="Profile Image" class="profile-top-right">
+{% endif %}
+
+<!-- 👤 Centered User Info -->
+<div class="card mx-auto" style="max-width: 500px;">
+    <div class="card-body text-center">
+        <h4 class="card-title">{{ user.name }}</h4>
+        <p><strong></strong> {{ age }} years old</p>
+        <p><strong></strong> {{ user.address }}</p>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Logout</a>
+    </div>
+</div>
+
+{% endblock %}
